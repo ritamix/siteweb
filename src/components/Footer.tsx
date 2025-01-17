@@ -1,6 +1,6 @@
-import React from 'react';
-import { Instagram, MapPin, Phone, Clock, Mail } from 'lucide-react';
-import { Language } from '../types';
+import React from "react";
+import { Instagram, MapPin, Phone, Clock, Mail } from "lucide-react";
+import { Language } from "../types";
 
 interface FooterProps {
   language: Language;
@@ -8,14 +8,15 @@ interface FooterProps {
 
 export function Footer({ language }: FooterProps) {
   const translations = {
-    contact: language === 'en' ? 'Contact' : 'Contacto',
-    address: language === 'en' ? 'Address' : 'Endereço',
-    hours: language === 'en' ? 'Opening Hours' : 'Horário',
-    followUs: language === 'en' ? 'Follow Us' : 'Siga-nos',
-    closed: language === 'en' ? 'Closed' : 'Fechado',
-    credits: language === 'en' 
-      ? 'Designed with passion by Rita-Mix team'
-      : 'Desenhado com paixão pela equipe Rita-Mix',
+    contact: language === "en" ? "Contact" : "Contacto",
+    address: language === "en" ? "Address" : "Endereço",
+    hours: language === "en" ? "Opening Hours" : "Horário",
+    followUs: language === "en" ? "Follow Us" : "Siga-nos",
+    closed: language === "en" ? "Closed" : "Fechado",
+    credits:
+      language === "en"
+        ? "Designed with passion by GOSITE-WEB"
+        : "Designed with passion by GOSITE-WEB",
   };
 
   return (
@@ -26,24 +27,26 @@ export function Footer({ language }: FooterProps) {
           <div className="space-y-4">
             <h2 className="text-2xl font-bold text-white">Rita-Mix</h2>
             <p className="text-white/70 leading-relaxed">
-              {language === 'en' 
-                ? 'Your cozy cocktail bar in the heart of Lisboa.'
-                : 'Seu acolhedor bar de cocktails no coração do Bairro Alto, Lisboa.'}
+              {language === "en"
+                ? "Your cozy cocktail bar in the heart of Lisboa."
+                : "Seu acolhedor bar de cocktails no coração do Bairro Alto, Lisboa."}
             </p>
           </div>
 
           {/* Contact Column */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-white">{translations.contact}</h3>
+            <h3 className="text-lg font-semibold text-white">
+              {translations.contact}
+            </h3>
             <div className="space-y-3">
-              <a 
+              <a
                 href="mailto:info@ritamix.pt"
                 className="flex items-center gap-2 text-white/70 hover:text-[#8bbaa6] transition-colors"
               >
                 <Mail size={18} />
                 <span>info@ritamix.pt</span>
               </a>
-              <a 
+              <a
                 href="tel:+351912149934"
                 className="flex items-center gap-2 text-white/70 hover:text-[#8bbaa6] transition-colors"
               >
@@ -59,7 +62,9 @@ export function Footer({ language }: FooterProps) {
 
           {/* Hours Column */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-white">{translations.hours}</h3>
+            <h3 className="text-lg font-semibold text-white">
+              {translations.hours}
+            </h3>
             <div className="space-y-3 text-white/70">
               <div className="flex justify-between">
                 <span>Tuesday - Friday</span>
@@ -78,7 +83,9 @@ export function Footer({ language }: FooterProps) {
 
           {/* Social Column */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-white">{translations.followUs}</h3>
+            <h3 className="text-lg font-semibold text-white">
+              {translations.followUs}
+            </h3>
             <div className="flex gap-4">
               <a
                 href="https://www.instagram.com/ritamix.pt/"
@@ -94,7 +101,12 @@ export function Footer({ language }: FooterProps) {
 
         {/* Bottom Credits */}
         <div className="pt-8 border-t border-white/10 text-center">
-          <p className="text-white/60 text-sm">{translations.credits}</p>
+          <p className="text-white/60 text-sm">
+            Designed with passion by {" "}
+            <a href="https://www.gosite-web.com/" target="_blank">
+              GOSITE-WEB
+            </a>
+          </p>
         </div>
       </div>
     </footer>

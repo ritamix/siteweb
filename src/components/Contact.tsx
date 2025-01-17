@@ -22,8 +22,9 @@ export function Contact({ language }: ContactProps) {
     message: "",
   });
 
+  const [formStatus, setFormStatus] = useState(""); // Status message
+
   useEffect(() => {
-    // Fetch data from Sanity
     client
       .fetch(
         `*[_type == "info"][0]{
@@ -45,16 +46,40 @@ export function Contact({ language }: ContactProps) {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const mailtoLink = `mailto:mistura.astronomica@gmail.com?subject=Reservation Request&body=${encodeURIComponent(
-      `Name: ${formData.name}
-Email: ${formData.email}
-Preferred Date: ${formData.date}
-Number of Guests: ${formData.guests}
-Message: ${formData.message}`
-    )}`;
-    window.location.href = mailtoLink;
+    setFormStatus("Sending...");
+
+    const formSubmission = new FormData();
+    Object.keys(formData).forEach((key) =>
+      formSubmission.append(key, formData[key as keyof typeof formData])
+    );
+
+    formSubmission.append("access_key", "0228888c-c43f-4e74-8b88-b28e2c87e140");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formSubmission,
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setFormStatus("Form Submitted Successfully");
+        setFormData({
+          name: "",
+          email: "",
+          date: "",
+          guests: "",
+          message: "",
+        });
+      } else {
+        setFormStatus("An error occurred. Please try again.");
+      }
+    } catch (error) {
+      console.error("Submission Error:", error);
+      setFormStatus("An error occurred. Please try again.");
+    }
   };
 
   if (!info) {
@@ -195,6 +220,7 @@ Message: ${formData.message}`
                   {submitText}
                 </button>
               </form>
+              {formStatus && <p className="mt-4 text-white">{formStatus}</p>}
             </div>
           </div>
         </div>
